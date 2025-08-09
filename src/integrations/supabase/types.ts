@@ -14,7 +14,189 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      candidates: {
+        Row: {
+          created_at: string | null
+          dedupe_hash: string | null
+          id: string
+          locale: string | null
+          mode: string
+          query: string
+          seed_source: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          dedupe_hash?: string | null
+          id?: string
+          locale?: string | null
+          mode?: string
+          query: string
+          seed_source?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          dedupe_hash?: string | null
+          id?: string
+          locale?: string | null
+          mode?: string
+          query?: string
+          seed_source?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      provider_usage: {
+        Row: {
+          cost_usd: number | null
+          endpoint: string | null
+          id: number
+          last_spent_at: string | null
+          provider: string
+          units: number | null
+          window_start: string | null
+        }
+        Insert: {
+          cost_usd?: number | null
+          endpoint?: string | null
+          id?: number
+          last_spent_at?: string | null
+          provider: string
+          units?: number | null
+          window_start?: string | null
+        }
+        Update: {
+          cost_usd?: number | null
+          endpoint?: string | null
+          id?: number
+          last_spent_at?: string | null
+          provider?: string
+          units?: number | null
+          window_start?: string | null
+        }
+        Relationships: []
+      }
+      reports: {
+        Row: {
+          candidate_id: string | null
+          computed_at: string | null
+          confidence: number | null
+          drivers: Json
+          id: string
+          indices: Json
+          snapshot: Json | null
+          subscores: Json
+          total_score: number
+        }
+        Insert: {
+          candidate_id?: string | null
+          computed_at?: string | null
+          confidence?: number | null
+          drivers: Json
+          id?: string
+          indices: Json
+          snapshot?: Json | null
+          subscores: Json
+          total_score: number
+        }
+        Update: {
+          candidate_id?: string | null
+          computed_at?: string | null
+          confidence?: number | null
+          drivers?: Json
+          id?: string
+          indices?: Json
+          snapshot?: Json | null
+          subscores?: Json
+          total_score?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reports_candidate_id_fkey"
+            columns: ["candidate_id"]
+            isOneToOne: false
+            referencedRelation: "candidates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      signals: {
+        Row: {
+          candidate_id: string | null
+          collected_at: string | null
+          collected_day: string
+          id: number
+          provider: string | null
+          raw: Json
+          signal_id: string
+          ttl_days: number | null
+        }
+        Insert: {
+          candidate_id?: string | null
+          collected_at?: string | null
+          collected_day?: string
+          id?: number
+          provider?: string | null
+          raw: Json
+          signal_id: string
+          ttl_days?: number | null
+        }
+        Update: {
+          candidate_id?: string | null
+          collected_at?: string | null
+          collected_day?: string
+          id?: number
+          provider?: string | null
+          raw?: Json
+          signal_id?: string
+          ttl_days?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "signals_candidate_id_fkey"
+            columns: ["candidate_id"]
+            isOneToOne: false
+            referencedRelation: "candidates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      watches: {
+        Row: {
+          cadence: string | null
+          candidate_id: string | null
+          created_at: string | null
+          id: string
+          is_active: boolean | null
+          user_id: string
+        }
+        Insert: {
+          cadence?: string | null
+          candidate_id?: string | null
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          user_id: string
+        }
+        Update: {
+          cadence?: string | null
+          candidate_id?: string | null
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "watches_candidate_id_fkey"
+            columns: ["candidate_id"]
+            isOneToOne: false
+            referencedRelation: "candidates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
