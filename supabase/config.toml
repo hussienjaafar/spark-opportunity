@@ -1,1 +1,10 @@
 project_id = "fyisghlfdtjjocsqqrjr"
+
+[functions.discover]
+verify_jwt = false
+
+[functions.analyze]
+verify_jwt = false
+
+[functions.diag]
+verify_jwt = false
